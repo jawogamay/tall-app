@@ -73,7 +73,12 @@
 
 
           {{-- Alpine Talk --}}
-          <div x-data="{
+          <div x-data="{ count: 0 }">
+            <button x-on:click="count++">Increment</button>
+
+            <span x-text="count"></span>
+        </div>
+          {{-- <div x-data="{
             todos: null,
             page: 0,
             perPage: 10,
@@ -94,6 +99,6 @@
             <template x-for="todo in todos">
                 <p x-text="todo.title"></p>
             </template>
-        </div>
+        </div> --}}
     </body>
 </html>
