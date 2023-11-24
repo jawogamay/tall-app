@@ -48,7 +48,7 @@
     <body>
 
         {{-- This is traditional Way --}}
-        <div class="chat-notification">
+        {{-- <div class="chat-notification">
             <div class="chat-notification-logo-wrapper">
               <img class="chat-notification-logo" src="/logo.png" alt="ChitChat Logo">
             </div>
@@ -56,7 +56,8 @@
               <h4 class="chat-notification-title">ChitChat</h4>
               <p class="chat-notification-message">You have a new message!</p>
             </div>
-          </div>
+          </div> --}}
+
 
 
         {{-- This is the tailwind way --}}
@@ -70,5 +71,29 @@
             </div>
           </div> --}}
 
+
+          {{-- Alpine Talk --}}
+          <div x-data="{
+            todos: null,
+            page: 0,
+            perPage: 10,
+            getTodos() {
+                fetch('https://jsonplaceholder.typicode.com/todos/')
+                .then(response => response.json())
+                .then(json => this.todos = json)
+            }
+        }" x-init="getTodos()">
+        <button x-on:click="{
+            paginate () {
+                const firstItem = this.perPage * this.page
+                const nextPage = this.items.slice(firstItem, firstItem + this.perPage)
+                this.todos = this.todas.concat(nextPage)
+                this.page++
+              }
+        }"> Load More </button>
+            <template x-for="todo in todos">
+                <p x-text="todo.title"></p>
+            </template>
+        </div>
     </body>
 </html>
